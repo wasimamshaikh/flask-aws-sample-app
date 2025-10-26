@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+    <title>List Files</title>
+</head>
+<body>
+    <h1>Files in S3 Bucket</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <p style="color: {% if category == 'danger' %}red{% elif category == 'success' %}green{% else %}orange{% endif %}">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <ul>
+        {% for file in files %}
+            <li>{{ file }}</li>
+        {% else %}
+            <li>No files found.</li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('index') }}">Home</a>
+</body>
+</html>
+
