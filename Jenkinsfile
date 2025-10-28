@@ -34,5 +34,26 @@ pipeline {
                 }
             }
         }
+     
+        stage('Push Image to ECR') {
+            steps {
+                script {
+                    sh '''
+                    docker tag flask-aws-sample-app:$IMAGE_TAG $ECR_REPO:$IMAGE_TAG
+                    docker push $ECR_REPO:$IMAGE_TAG
+                    '''
+                }
+            }
+        }
+    
+    post {
+        success {
+            echo "✅ Successfully built and pushed image to ECR: $ECR_REPO:$IMAGE_TAG"
+        }
+        failure {
+            echo "❌ Build failed!"
+        }
+    }
+
    }
 }
