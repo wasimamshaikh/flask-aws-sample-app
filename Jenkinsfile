@@ -12,7 +12,7 @@ pipeline {
         stage('Docker Build Image') {
             steps {
                 script {
-                    sh 'docker build -t flask-aws-sample-app:$IMAGE_TAG .'
+                    sh "docker build -t flask-aws-sample-app:${IMAGE_TAG} ."
                 }
             }
         }
