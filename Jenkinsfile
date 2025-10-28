@@ -1,6 +1,12 @@
 pipeline {
     agent any
 
+    environment {
+        AWS_REGION = 'us-east-1'
+        IMAGE_TAG = "${env.BUILD_NUMBER}"     // Jenkins build number as image tag
+        ECR_REPO = '592546279953.dkr.ecr.us-east-1.amazonaws.com/flask-aws-sample-app'
+    }
+
 
     stages {
         stage('Checkout Code') {
