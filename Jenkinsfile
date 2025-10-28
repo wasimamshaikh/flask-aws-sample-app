@@ -45,7 +45,8 @@ pipeline {
                 }
             }
         }
-    
+    }
+
     post {
         success {
             echo "✅ Successfully built and pushed image to ECR: $ECR_REPO:$IMAGE_TAG"
@@ -55,5 +56,4 @@ pipeline {
         }
     }
 
-   }
 }
