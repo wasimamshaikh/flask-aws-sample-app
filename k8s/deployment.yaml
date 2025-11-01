@@ -12,9 +12,11 @@ spec:
       labels:
         app: flask-app
     spec:
+      imagePullSecrets:
+        - name: ecr-secret
       containers:
-      - name: flask-app
-        image: 592546279953.dkr.ecr.us-east-1.amazonaws.com/aws-flask-repo:latest
-        imagePullPolicy: IfNotPresent
-        ports:
-        - containerPort: 5000
+        - name: flask-app
+          image: 592546279953.dkr.ecr.us-east-1.amazonaws.com/aws-flask-repo:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
