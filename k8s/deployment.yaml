@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: flask-app
-        image: <will-be-replaced-by-kubectl>
+        image: 592546279953.dkr.ecr.us-east-1.amazonaws.com/aws-flask-repo:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5000
