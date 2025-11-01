@@ -52,18 +52,18 @@ pipeline {
                 script {
                     sh '''
                     echo "Deploying to Minikube cluster..."
-                    
-                    # Update image in YAML to latest tag
-                    sed -i "s|image: .*|image: ${ECR_REPO}:${BUILD_NUMBER}|g" k8s/deployment.yaml
-
-                    echo "Updated deployment.yaml to use image: ${ECR_REPO}:${BUILD_NUMBER}"
 
                     # Apply deployment and service
                     kubectl apply -f k8s/deployment.yaml
                     kubectl apply -f k8s/service.yaml
+          
+                    # Update the deployment image
+                    kubectl set image deployment/flask-app flask-app=${ECR_REPO}:${BUILD_NUMBER} --record
+
+                    echo "Updated deployment.yaml to use image: ${ECR_REPO}:${BUILD_NUMBER}"
                     
-                    kubectl rollout restart deployment flask-app
-                    echo "Deployment done successfully!"
+                    kubectl rollout status deployment flask-app --timeout=120s
+                    echo "Deployment successfully rolled out!"
                     '''
                 }
             }
