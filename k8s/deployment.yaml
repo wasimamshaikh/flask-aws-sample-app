@@ -20,3 +20,18 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5000
+          env:
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secret
+                  key: aws_access_key_id
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secret
+                  key: aws_secret_access_key
+            - name: AWS_DEFAULT_REGION
+              value: "us-east-1"
+            - name: S3_BUCKET
+              value: "wasim-flask-aws-bucket"
